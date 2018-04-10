@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.ct label{
+	width: 100px;
+}
+.ct input{
+	margin:0px 20px 0px 20px;
+}
+.button{
+	margin: 0px 10px 0px 10px;
+}
+#currentPage{
+	width: 30px;
+	text-align: center;
+}
+#selectDiv{
+	margin: 20px 0px 20px 0px;
+	text-align: center;
+}
+.condition{
+	margin: 20px 0px 20px 0px;
+}
+#btnDiv{
+	text-align: center;
+}

@@ -1,0 +1,7 @@
+/* 显示未读消息数量CSS */
+#messageNum{
+	color: blue;
+	font-size: 12px;
+	font-weight: bolder;
+	margin-left: 3px;
+}

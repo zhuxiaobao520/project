@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+label{
+	width: 150px;
+}
+input{
+	margin:0px 20px 0px 20px;
+}
+.button{
+	margin: 0px 50px 0px 150px;
+}
+.form_P{
+	margin: 20px 0px 20px 60px;
+}
+#button_P{
+	text-align: center;
+}

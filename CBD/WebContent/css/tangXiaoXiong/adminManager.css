@@ -1,0 +1,60 @@
+.style{
+	width: 50px;
+	height: 25px;
+	background-color: rgb(0,141,227);
+	border:0px;
+	border-radius: 5px;
+	color: white;
+}
+.th_but{
+	color:white;
+	background-color:rgb(0,141,227);
+}
+.table{
+	width:696px;
+	height:100px;
+	border: 1px solid gray;
+}
+.table2{
+	width:696px;
+	height:128px;
+	border: 1px solid gray;
+}
+.a_xiugai{
+	float: right;
+	color: rgb(0,141,227);
+	margin-right: 10px;
+}
+.mofu{
+	width: 280px;
+	border: 1px solid gray;
+	float: right;
+	margin-right: 10px;
+}
+.a_tit{
+	margin-left: 15px;
+}
+.a_tit input{
+	line-height:23px;
+	float:right;
+	margin-right: 10px;
+}
+#a_addCompany{
+	
+}
+#carportInfo{
+	width:648px;
+	height:560px;
+}
+.tbody tr{
+	height: 25px;
+}
+#selectSta{
+	float: right;
+}
+.adminLogining{
+		width: 100px;
+}
+label{
+	width: 100px;
+}

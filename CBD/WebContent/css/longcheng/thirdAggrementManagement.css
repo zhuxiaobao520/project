@@ -1,0 +1,48 @@
+/* 外部合约管理页面css */
+
+/* 控制合约表格布局 */
+#thirdAggrementData{
+	width: 780px;
+	font-size: 12px;
+	margin-top: 20px;
+}
+
+#thirdAggrementData td{
+	padding-bottom: 8px;
+	padding-top: 8px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: center;
+}
+
+#thirdAggrementInfo h1{
+	text-align: center;
+}
+#thirdAggrementInfo{
+	height: 350px;
+	margin: 0 auto;
+}
+
+/* 控制操作合约按钮布局 */
+#operationDiv{
+	margin-left: 200px;
+	margin-top: 30px; 
+}
+.operation{
+	margin-right:80px;
+	font-size: 18px;
+	height: 30px;
+}
+
+#inputPage{
+	width: 15px;
+}
+
+#btnDiv{
+	margin:0 auto;
+	margin-top: -20px;
+}
+.btn{
+	height: 30px;
+}
+

@@ -1,0 +1,48 @@
+/* 添加外部合约页面css */
+
+#continueThirdAggrementForm{
+	margin-top: 20px;
+}
+#continueThirdAggrementInfo h1{
+	text-align: center;
+}
+.form-control{
+	height: 30px;
+}
+.form-group{
+	margin-top:20px;
+	margin-left: 20px;
+}
+input[type=text], select { border: 1px solid #DCDEE0;  padding: 0px 16px; font-size: 14px; color: #555555; outline:none;line-height:50px; color:#888;}
+.btn{
+	margin-top:50px;
+	height: 30px;
+	margin-right: 200px;
+}
+#btnDiv{
+	clear: both;
+	margin-left: 200px;
+}
+#formleft{
+	width: 380px;
+	float: left;
+}
+#formright{
+	width: 380px;
+	float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

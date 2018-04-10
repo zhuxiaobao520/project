@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-init-method="init" default-destroy-method="destroy">
+
+	<!-- 开启自动扫描bean注解 -->
+	<context:component-scan base-package="com.cbd" />
+
+	<!--开启aop注解 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 配置数据源连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- 设置数据库驱动 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<!-- 设置书库url -->
+		<property name="jdbcUrl"
+			value="jdbc:mysql://127.0.0.1:3306/cbd?characterEncoding=UTF-8" />
+		<!-- 设置数据库用户名 -->
+		<property name="user" value="root" />
+		<!-- 设置数据库密码 -->
+
+		<property name="password" value="1203520121" />
+
+		<!-- 设置连接池最大连接数 -->
+		<property name="maxPoolSize" value="20" />
+		<!-- 设置连接池最小连接数 -->
+		<property name="minPoolSize" value="1" />
+		<!-- 设置初始化连接池连接数（默认3个） -->
+		<property name="initialPoolSize" value="3" />
+
+		<!-- 设置连接池超时时长 -->
+		<property name="maxIdleTime" value="5000" />
+
+		<!-- 设置连接池连接耗尽批量创建的连接数 -->
+		<property name="acquireIncrement" value="2" />
+		<!-- 设置连接池检测线程间隔时长 -->
+		<property name="idleConnectionTestPeriod" value="3000" />
+	</bean>
+
+	<!-- 配置JDBC事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 设置数据库连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- 配置继承MyBatis的SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 设置数据源连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 设置实体类别名 -->
+		<property name="typeAliasesPackage" value="com.cbd.entity" />
+	</bean>
+
+	<!-- 配置继承mybatis的Mapper映射（扫描模式-所有的Mapper都继承SQLMapper） -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 设置Mapper包路劲 -->
+		<property name="basePackage" value="com.cbd.mapper" />
+		<!-- 设置SqlMapper接口包路径 -->
+		<property name="markerInterface" value="com.cbd.mapper.SqlMapper" />
+	</bean>
+
+	<!-- 以下配置是为了引入shiro -->
+
+	<!-- <bean id="myRealm" class="com.cbd.realm.MyRealm" /> -->
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 单个realm的配置方式 -->
+		<!-- <property name="realm" ref="myRealm"/> -->
+		<!-- 注入缓存管理器 -->  
+        <property name="cacheManager" ref="cacheManager" />
+        <!-- 配置认证策略 -->
+       	<property name="authenticator" ref="authenticator" />
+		<!-- 多个realm的配置方式 -->
+		<property name="realms">
+			<list>
+				<ref bean="companyRealm" />
+				<ref bean="userRealm" />
+				<ref bean="adminRealm" />
+			</list>
+		</property>
+	</bean>
+	<!-- 配置使用自定义认证器，可以实现多Realm认证，并且可以指定特定Realm处理特定类型的验证 -->
+	<bean id="authenticator" class="com.cbd.realm.CustomizedModularRealmAuthenticator"> 
+		<!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 --> 
+		<property name="authenticationStrategy">
+			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy" /> 
+		</property> 
+	</bean>
+	
+	<!-- 配置多个Realm -->
+	<bean id="companyRealm" class="com.cbd.realm.CompanyRealm" />
+	<bean id="userRealm" class="com.cbd.realm.UserRealm" />
+	<bean id="adminRealm" class="com.cbd.realm.AdminRealm" />
+	
+
+	<!-- Shiro过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- Shiro的核心安全接口,这个属性是必须的 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 身份认证失败，则跳转到登录页面的配置 -->
+		<property name="loginUrl" value="/jsp/home.jsp" />
+		<!-- 权限认证失败，则跳转到指定页面 -->
+		<property name="unauthorizedUrl" value="/jsp/home.jsp" />
+		<!-- Shiro连接约束配置,即过滤链的定义 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 静态资源  -->
+				/Assets/** = anon
+				/bootstrap/** = anon
+				/carportCSS/** = anon
+				/css/** = anon
+				/image/** = anon
+				/js/** = anon
+				
+				<!-- 基础页面   -->
+				/jsp/home.jsp=anon
+				/jsp/login.jsp = anon
+				/jsp/register.jsp = anon
+				/jsp/bottom.jsp = anon
+				
+				<!-- 登录url -->
+				/userLogin = anon
+				/companyLogin = anon
+				/admLogin = anon
+				<!-- 注销url -->
+				/jumpExit = anon
+				<!-- 注册url -->
+				/register = anon
+				<!-- 跳转url -->	
+				/jumpHome = anon
+				/jumpRegister = anon
+				/jumpContact = anon
+				/jumpLogin = anon
+	
+				/jsp/userJsp/** = perms[user]
+				/jsp/companyJsp/** = perms[company]
+				/jsp/managerJsp/** = perms[manager]
+				
+				
+			</value>
+		</property>
+	</bean>
+    
+    <!-- 缓存Ehcache --> 
+  <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml" />
+	</bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- 开启Shiro注解 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+</beans>

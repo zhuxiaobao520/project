@@ -1,0 +1,27 @@
+#carportList{
+	margin-left: 300px;
+	margin-top: 50px;
+}
+.carportAddress{
+	margin-left: 50px;
+}
+.saleTime{
+	margin-left: 50px;
+}
+.lookRealInfo{
+	margin-left: 90px;
+	color: blue;
+}
+.salePrice{
+	margin-left: 50px;
+}
+.carportImg{
+	float: left;
+}
+#pageBtn{
+	clear: both;
+	padding-top: 20px;
+}
+.tmp{
+	margin-top: 50px;
+}

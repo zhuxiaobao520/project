@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+.ct label{
+	width: 200px;
+}
+.ct input{
+	margin:0px 20px 0px 20px;
+}
+.selectedTr{
+	background-color: gray;
+}
+
+.error{
+	color:red;
+	font-size: 14px;
+}
+.button{
+	margin: 0px 10px 0px 10px;
+}
+#currentPage{
+	width: 30px;
+	text-align: center;
+}
+#tbody tr:HOVER {
+	cursor: pointer;
+}
+#btnDiv{
+	text-align: center;
+}

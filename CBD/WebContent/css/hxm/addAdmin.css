@@ -1,0 +1,23 @@
+/*  黄先明 */
+
+.form-control{
+	width: 500px;
+}
+#formDiv{
+	margin-left: 50px;
+}
+#btnDiv{
+	margin-left: 150px;
+}
+#return{
+	margin-left: 50px;
+}
+#errorInfo{
+	color: red;
+}
+#addAdminError{
+	color: red;
+}
+.errorMessages{
+	color: red;
+}

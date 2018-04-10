@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+@CHARSET "UTF-8";
+.selectedTr{
+	background-color: gray;
+}
+.carportContent:HOVER {
+	cursor: pointer;
+}
+.carportContent{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.carportImg{
+	float:left;
+	margin-left: 20px;
+	margin-right: 30px;
+}
+.carportContent label{
+	width: 130px;
+}
+.button{
+	margin: 0px 10px 0px 10px;
+}
+#currentPage{
+	width: 30px;
+	text-align: center;
+}
+#btnDiv{
+	text-align: center;
+}
+.saleCarportContent{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.saleCarportContent:HOVER {
+	cursor: pointer;
+}
